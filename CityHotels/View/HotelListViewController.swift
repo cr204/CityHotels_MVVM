@@ -10,10 +10,8 @@ import UIKit
 class HotelListViewController: UIViewController {
     
     private let viewModel = HotelListViewModel()
-    //var hotels: [HotelItemData] = []
-    
-    private var topSafeArea: CGFloat = 0
-    private var sortByRoom = false
+   private var topSafeArea: CGFloat = 0
+
     
     let tableView: UITableView = {
         let tv = UITableView()
@@ -49,8 +47,7 @@ class HotelListViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(ListViewCell.self, forCellReuseIdentifier: "HotelListCell")
         
-        
-        viewModel.fetchHotelListData(limit: 0) { _ in
+        viewModel.fetchHotelListData() { _ in
             DispatchQueue.main.async {
                 self.setupViews()
             }
@@ -67,14 +64,8 @@ class HotelListViewController: UIViewController {
     }
     
     @objc private func sortTapped() {
-        if sortByRoom {
-            viewModel.hotels.sort { $0.availabelRooms > $1.availabelRooms }
-        } else {
-            viewModel.hotels.sort { $0.distance < $1.distance }
-        }
-        self.navigationItem.rightBarButtonItem?.title = sortByRoom ? "By distance" : "By rooms"
-        sortByRoom = !sortByRoom
-        
+        viewModel.sortList()
+        self.navigationItem.rightBarButtonItem?.title = viewModel.sortByRoom ? "By rooms" : "By distance"
         DispatchQueue.main.async {
             self.tableView.reloadSections([0], with: .fade)
         }
