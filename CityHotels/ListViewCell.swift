@@ -14,6 +14,7 @@ class ListViewCell: UITableViewCell {
             self.labelName.text = self.hotelDetails?.name ?? ""
             self.labelAddress.text = self.hotelDetails?.address ?? "adres not shown"
             self.labelDistance.text = String(self.hotelDetails?.distance ?? 0) + " km away"
+            self.labelAvailable.text = " - \(String(self.hotelDetails?.availabelRooms ?? 0)) rooms"
             self.stars.setValue(n: Int(self.hotelDetails?.stars ?? 0.0))
             self.initViews()
         }
@@ -47,6 +48,15 @@ class ListViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = UIColor(red: 0.1, green: 0.31, blue: 0.45, alpha: 1.0)
         label.font = UIFont.systemFont(ofSize: 11, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let labelAvailable: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(red: 1.0, green: 0.31, blue: 0.45, alpha: 1.0)
+        //label.font = UIFont.systemFont(ofSize: 11, weight: .regular)
+        label.font = UIFont.italicSystemFont(ofSize: 11)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -97,8 +107,11 @@ class ListViewCell: UITableViewCell {
         
         self.contentView.addSubview(labelDistance)
         NSLayoutConstraint(item: labelDistance, attribute: .left, relatedBy: .equal, toItem: icon, attribute: .right, multiplier: 1, constant: 5).isActive = true
-        NSLayoutConstraint(item: labelDistance, attribute: .right, relatedBy: .equal, toItem: self.contentView, attribute: .right, multiplier: 1, constant: -15).isActive = true
         NSLayoutConstraint(item: labelDistance, attribute: .centerY, relatedBy: .equal, toItem: icon, attribute: .centerY, multiplier: 1, constant: 2).isActive = true
+        
+        self.contentView.addSubview(labelAvailable)
+        NSLayoutConstraint(item: labelAvailable, attribute: .left, relatedBy: .equal, toItem: labelDistance, attribute: .right, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: labelAvailable, attribute: .centerY, relatedBy: .equal, toItem: icon, attribute: .centerY, multiplier: 1, constant: 2).isActive = true
         
         self.contentView.addSubview(stars)
         NSLayoutConstraint(item: stars, attribute: .right, relatedBy: .equal, toItem: self.contentView, attribute: .right, multiplier: 1, constant: -120).isActive = true

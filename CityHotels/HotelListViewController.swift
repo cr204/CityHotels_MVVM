@@ -10,10 +10,10 @@ import UIKit
 class HotelListViewController: UIViewController {
     
     private let viewModel = HotelListViewModel()
-    private var hotels: [HotelItemData] = []
+    //var hotels: [HotelItemData] = []
     
     private var topSafeArea: CGFloat = 0
-    private var sortByStar = false
+    private var sortByRoom = false
     
     let tableView: UITableView = {
         let tv = UITableView()
@@ -50,13 +50,7 @@ class HotelListViewController: UIViewController {
         tableView.register(ListViewCell.self, forCellReuseIdentifier: "HotelListCell")
         
         
-        viewModel.fetchHotelListData(limit: 0) { (list) in
-            guard let list = list else {
-                print("CharacterList.characters: nil")
-                return
-            }
-            self.hotels = list
-            
+        viewModel.fetchHotelListData(limit: 0) { _ in
             DispatchQueue.main.async {
                 self.setupViews()
             }
@@ -70,21 +64,16 @@ class HotelListViewController: UIViewController {
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: tableView)
         NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: tableView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        //view.addConstraintsWithFormat(format: "V:|-50-[v0]|", views: tableView)
     }
     
     @objc private func sortTapped() {
-        print("Sort list")
-        
-        if sortByStar {
-            hotels.sort { $0.distance < $1.distance }
+        if sortByRoom {
+            viewModel.hotels.sort { $0.availabelRooms > $1.availabelRooms }
         } else {
-            hotels.sort { $0.stars > $1.stars }
+            viewModel.hotels.sort { $0.distance < $1.distance }
         }
-        sortByStar = !sortByStar
-        
-        //btnSort.title = "by star"
-        self.navigationItem.rightBarButtonItem?.title = sortByStar ? "By star" : "By distance"
+        self.navigationItem.rightBarButtonItem?.title = sortByRoom ? "By distance" : "By rooms"
+        sortByRoom = !sortByRoom
         
         DispatchQueue.main.async {
             self.tableView.reloadSections([0], with: .fade)
@@ -96,13 +85,13 @@ class HotelListViewController: UIViewController {
 
 extension HotelListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return hotels.count
+        return viewModel.hotels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HotelListCell", for: indexPath) as! ListViewCell
         DispatchQueue.main.async {
-            cell.hotelDetails = self.hotels[indexPath.row]
+            cell.hotelDetails = self.viewModel.hotels[indexPath.row]
         }
         return cell
     }
@@ -113,6 +102,12 @@ extension HotelListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let details = HotelDetailsViewController()
+        details.data = viewModel.hotels[indexPath.row]
+        self.navigationController?.pushViewController(details, animated: true)
     }
 
 }
