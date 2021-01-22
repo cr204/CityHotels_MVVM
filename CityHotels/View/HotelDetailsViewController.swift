@@ -21,13 +21,13 @@ class HotelDetailsViewController: UIViewController {
         }
     }
 
-//    let activityIndicator: UIActivityIndicatorView = {
-//        let view = UIActivityIndicatorView()
-//        view.style = .whiteLarge
-//        view.hidesWhenStopped = true
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
+    let activityIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.style = .whiteLarge
+        view.hidesWhenStopped = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     let hotelImageView: UIImageView = {
         let imgView = UIImageView()
@@ -138,10 +138,10 @@ class HotelDetailsViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(onRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         
-//        activityIndicator.startAnimating()
-//        view.addSubview(activityIndicator)
-//        NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
-//        NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+        activityIndicator.startAnimating()
+        view.addSubview(activityIndicator)
+        NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
 
     }
     
@@ -206,9 +206,12 @@ class HotelDetailsViewController: UIViewController {
         NSLayoutConstraint(item: labelStars, attribute: .right, relatedBy: .equal, toItem: container, attribute: .right, multiplier: 1, constant: -12).isActive = true
         labelStars.text = "\(details.stars)"
         
+        let viewHeight = self.view.frame.height
+        let estMapHeight: CGFloat = viewHeight < 700 ? 150.0 : 200.0
+        hideViews(viewHeight < 400 ? true : false)
         
         container.addSubview(mapView)
-        mapView.heightAnchor.constraint(equalToConstant: 200.0).isActive = true
+        mapView.heightAnchor.constraint(equalToConstant: estMapHeight).isActive = true
         container.addConstraintsWithFormat(format: "H:|-20-[v0]-20-|", views: mapView)
         NSLayoutConstraint(item: mapView, attribute: .centerX, relatedBy: .equal, toItem: container, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: mapView, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1, constant: 60).isActive = true
@@ -252,6 +255,7 @@ class HotelDetailsViewController: UIViewController {
         maskView.backgroundColor = .blue
         maskView.layer.cornerRadius = 0
         hotelImageView.mask = maskView
+        
     }
     
     func centerViewOnLocation() {
