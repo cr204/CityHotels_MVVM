@@ -46,7 +46,7 @@ class ListViewCell: UITableViewCell {
     
     let labelDistance: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(red: 0.1, green: 0.31, blue: 0.45, alpha: 1.0)
+        label.textColor = Colors.textDarkBlue
         label.font = UIFont.systemFont(ofSize: 11, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -54,8 +54,7 @@ class ListViewCell: UITableViewCell {
     
     let labelAvailable: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(red: 1.0, green: 0.31, blue: 0.45, alpha: 1.0)
-        //label.font = UIFont.systemFont(ofSize: 11, weight: .regular)
+        label.textColor = Colors.textGray
         label.font = UIFont.italicSystemFont(ofSize: 11)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -63,7 +62,6 @@ class ListViewCell: UITableViewCell {
     
     let stars: StarsView = {
         let view = StarsView()
-       
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

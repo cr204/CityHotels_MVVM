@@ -16,6 +16,7 @@ class DetailViewModel {
         let link = Links.hotelDetails + "\(id)" + ".json"
         NetworkService.getJSON(urlString: link) { (details: HotelItemData?) in
             if let data = details {
+                self.details = data
                 completion(data)
             }
         }

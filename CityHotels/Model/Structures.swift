@@ -15,8 +15,8 @@ struct HotelItemData: Decodable {
     let distance: Double
     let image: String?
     let suites_availability: String
-    let lat: Float64?
-    let lon: Float64?
+    let lat: Double?
+    let lon: Double?
     
     var availabelRooms: Int {
         let count = suites_availability.split(separator: ":").count

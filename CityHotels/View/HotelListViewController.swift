@@ -39,7 +39,7 @@ class HotelListViewController: UIViewController {
 
         let btnSort = UIBarButtonItem(title: "sort", style: .plain, target: self, action: #selector(sortTapped))
         
-        self.view.backgroundColor = UIColor.lightGray
+        self.view.backgroundColor = Colors.bgLight
         self.navigationItem.title = "City Hotels"
         self.navigationItem.rightBarButtonItem = btnSort
         
@@ -63,6 +63,8 @@ class HotelListViewController: UIViewController {
         NSLayoutConstraint(item: tableView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
     }
     
+    
+    
     @objc private func sortTapped() {
         viewModel.sortList()
         self.navigationItem.rightBarButtonItem?.title = viewModel.sortByRoom ? "By rooms" : "By distance"
@@ -74,6 +76,8 @@ class HotelListViewController: UIViewController {
 
 }
 
+
+// MARK: - TableViewDataSource
 extension HotelListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.hotels.count
@@ -83,12 +87,14 @@ extension HotelListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HotelListCell", for: indexPath) as! ListViewCell
         DispatchQueue.main.async {
             cell.hotelDetails = self.viewModel.hotels[indexPath.row]
+            cell.labelAvailable.textColor = self.viewModel.sortByRoom ? Colors.textGray : Colors.textRed 
         }
         return cell
     }
 
 }
 
+// MARK: - TableViewDelegate
 extension HotelListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

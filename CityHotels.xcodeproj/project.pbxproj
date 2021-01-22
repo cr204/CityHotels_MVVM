@@ -21,6 +21,8 @@
 		5A667F6125B953E70007EF1E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A667F6025B953E70007EF1E /* Extensions.swift */; };
 		5A667F6425B96C570007EF1E /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A667F6325B96C570007EF1E /* ListViewCell.swift */; };
 		5AC61F1525B9A009001859B4 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC61F1425B9A009001859B4 /* DetailsViewModel.swift */; };
+		5AC61F1825B9A87E001859B4 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC61F1725B9A87E001859B4 /* Colors.swift */; };
+		5AC61F1B25B9C22E001859B4 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC61F1A25B9C22E001859B4 /* ContainerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		5A667F6025B953E70007EF1E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5A667F6325B96C570007EF1E /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
 		5AC61F1425B9A009001859B4 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		5AC61F1725B9A87E001859B4 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		5AC61F1A25B9C22E001859B4 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 			children = (
 				5A667F4925B93FB90007EF1E /* HotelListViewController.swift */,
 				5A3FCD0625B98D6F00B6B352 /* HotelDetailsViewController.swift */,
+				5AC61F1A25B9C22E001859B4 /* ContainerView.swift */,
 				5A667F6325B96C570007EF1E /* ListViewCell.swift */,
 				5A3FCD0125B97EA200B6B352 /* StarsView.swift */,
 			);
@@ -119,6 +124,7 @@
 				5A667F5D25B94A0C0007EF1E /* Links.swift */,
 				5A667F5525B9470C0007EF1E /* NetworkService.swift */,
 				5A667F6025B953E70007EF1E /* Extensions.swift */,
+				5AC61F1725B9A87E001859B4 /* Colors.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -200,9 +206,11 @@
 				5A667F3625B93EDF0007EF1E /* SceneDelegate.swift in Sources */,
 				5A667F5E25B94A0C0007EF1E /* Links.swift in Sources */,
 				5A667F4A25B93FB90007EF1E /* HotelListViewController.swift in Sources */,
+				5AC61F1825B9A87E001859B4 /* Colors.swift in Sources */,
 				5A3FCD0225B97EA200B6B352 /* StarsView.swift in Sources */,
 				5A667F6425B96C570007EF1E /* ListViewCell.swift in Sources */,
 				5A667F5325B946CC0007EF1E /* HotelListViewModel.swift in Sources */,
+				5AC61F1B25B9C22E001859B4 /* ContainerView.swift in Sources */,
 				5AC61F1525B9A009001859B4 /* DetailsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
