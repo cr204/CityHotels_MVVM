@@ -239,12 +239,10 @@ class HotelDetailsViewController: UIViewController {
     
     @objc private func onRotated() {
         if(UIDevice.current.orientation.isLandscape) {
-            print("landscape")
             self.hideViews(true)
         }
 
         if(UIDevice.current.orientation.isPortrait) {
-            print("Portrait")
             self.hideViews(false)
         }
     }
